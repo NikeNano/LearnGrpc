@@ -3,7 +3,7 @@ module github.com/NikeNano/LearnGrpc/server
 go 1.15
 
 require (
-	github.com/NikeNano/LearnGrpc/api v0.0.0-20210202154015-6b29a74a98aa
+	github.com/NikeNano/LearnGrpc/api v0.0.0-20210202212311-7d718a8c014a
 	github.com/google/go-cmp v0.5.4 // indirect
 	golang.org/x/net v0.0.0-20210119194325-5f4716e94777 // indirect
 	golang.org/x/sys v0.0.0-20210124154548-22da62e12c0c // indirect

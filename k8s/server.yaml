@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: add-deployment
+  labels:
+    app: add
+spec:
+  selector:
+    matchLabels:
+      app: add
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: add
+    spec:
+      containers:
+        - name: add
+          image: nikenano/learn-grpc-server:latest
+          imagePullPolicy: Always
+          ports:
+            - name: grpc-service
+              containerPort: 3000
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          env:
+            - name: SVC_PORT
+              value: "3000"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: add-service
+spec:
+  selector:
+    app: add
+  ports:
+    - port: 3000
+      targetPort: grpc-service

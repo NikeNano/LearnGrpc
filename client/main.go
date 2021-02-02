@@ -26,6 +26,7 @@ func main() {
 		port = "50051"
 	}
 
+	fmt.Printf("The port is %v", port)
 	cc, err := grpc.Dial(hostname+":"+port, grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("could not connect: %v", err)
@@ -33,7 +34,6 @@ func main() {
 	defer cc.Close()
 
 	c := api.NewNanoServiceClient(cc)
-	fmt.Printf("Created client: %f", c)
 
 	callService(c)
 

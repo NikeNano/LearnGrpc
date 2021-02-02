@@ -28,7 +28,7 @@ func (*nanoServer) NanoService(ctx context.Context, req *api.NanoRequest) (*api.
 	return res, nil
 }
 
-func (*nanoServer) NanoSuperServer(ctx context.Context, req *api.NanoRequest) (*api.NanoResponse, error) {
+func (*nanoServer) NanoSuperService(ctx context.Context, req *api.NanoRequest) (*api.NanoResponse, error) {
 	res := &api.NanoResponse{
 		Response: "Success Success oops dont care what you send",
 	}
