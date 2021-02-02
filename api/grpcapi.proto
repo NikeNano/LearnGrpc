@@ -17,3 +17,9 @@ service NanoService {
 	rpc nanoService(NanoRequest) returns (NanoResponse) {};
  
 }
+
+service NanoSuperService {
+	
+	rpc nanoSuperService(NanoRequest) returns (NanoResponse) {};
+
+}

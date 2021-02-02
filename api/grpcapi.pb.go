@@ -137,8 +137,14 @@ var file_grpcapi_proto_rawDesc = []byte{
 	0x6f, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x15, 0x2e, 0x6e, 0x61, 0x6e, 0x6f, 0x67,
 	0x72, 0x70, 0x63, 0x2e, 0x4e, 0x61, 0x6e, 0x6f, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a,
 	0x16, 0x2e, 0x6e, 0x61, 0x6e, 0x6f, 0x67, 0x72, 0x70, 0x63, 0x2e, 0x4e, 0x61, 0x6e, 0x6f, 0x52,
-	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x42, 0x0a, 0x5a, 0x08, 0x6e, 0x61, 0x6e,
-	0x6f, 0x67, 0x72, 0x70, 0x63, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x32, 0x57, 0x0a, 0x10, 0x4e, 0x61, 0x6e,
+	0x6f, 0x53, 0x75, 0x70, 0x65, 0x72, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x43, 0x0a,
+	0x10, 0x6e, 0x61, 0x6e, 0x6f, 0x53, 0x75, 0x70, 0x65, 0x72, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63,
+	0x65, 0x12, 0x15, 0x2e, 0x6e, 0x61, 0x6e, 0x6f, 0x67, 0x72, 0x70, 0x63, 0x2e, 0x4e, 0x61, 0x6e,
+	0x6f, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x16, 0x2e, 0x6e, 0x61, 0x6e, 0x6f, 0x67,
+	0x72, 0x70, 0x63, 0x2e, 0x4e, 0x61, 0x6e, 0x6f, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
+	0x22, 0x00, 0x42, 0x0a, 0x5a, 0x08, 0x6e, 0x61, 0x6e, 0x6f, 0x67, 0x72, 0x70, 0x63, 0x62, 0x06,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -160,9 +166,11 @@ var file_grpcapi_proto_goTypes = []interface{}{
 }
 var file_grpcapi_proto_depIdxs = []int32{
 	0, // 0: nanogrpc.NanoService.nanoService:input_type -> nanogrpc.NanoRequest
-	1, // 1: nanogrpc.NanoService.nanoService:output_type -> nanogrpc.NanoResponse
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
+	0, // 1: nanogrpc.NanoSuperService.nanoSuperService:input_type -> nanogrpc.NanoRequest
+	1, // 2: nanogrpc.NanoService.nanoService:output_type -> nanogrpc.NanoResponse
+	1, // 3: nanogrpc.NanoSuperService.nanoSuperService:output_type -> nanogrpc.NanoResponse
+	2, // [2:4] is the sub-list for method output_type
+	0, // [0:2] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -207,7 +215,7 @@ func file_grpcapi_proto_init() {
 			NumEnums:      0,
 			NumMessages:   2,
 			NumExtensions: 0,
-			NumServices:   1,
+			NumServices:   2,
 		},
 		GoTypes:           file_grpcapi_proto_goTypes,
 		DependencyIndexes: file_grpcapi_proto_depIdxs,
@@ -293,6 +301,78 @@ var _NanoService_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "nanoService",
 			Handler:    _NanoService_NanoService_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "grpcapi.proto",
+}
+
+// NanoSuperServiceClient is the client API for NanoSuperService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type NanoSuperServiceClient interface {
+	NanoSuperService(ctx context.Context, in *NanoRequest, opts ...grpc.CallOption) (*NanoResponse, error)
+}
+
+type nanoSuperServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewNanoSuperServiceClient(cc grpc.ClientConnInterface) NanoSuperServiceClient {
+	return &nanoSuperServiceClient{cc}
+}
+
+func (c *nanoSuperServiceClient) NanoSuperService(ctx context.Context, in *NanoRequest, opts ...grpc.CallOption) (*NanoResponse, error) {
+	out := new(NanoResponse)
+	err := c.cc.Invoke(ctx, "/nanogrpc.NanoSuperService/nanoSuperService", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// NanoSuperServiceServer is the server API for NanoSuperService service.
+type NanoSuperServiceServer interface {
+	NanoSuperService(context.Context, *NanoRequest) (*NanoResponse, error)
+}
+
+// UnimplementedNanoSuperServiceServer can be embedded to have forward compatible implementations.
+type UnimplementedNanoSuperServiceServer struct {
+}
+
+func (*UnimplementedNanoSuperServiceServer) NanoSuperService(context.Context, *NanoRequest) (*NanoResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method NanoSuperService not implemented")
+}
+
+func RegisterNanoSuperServiceServer(s *grpc.Server, srv NanoSuperServiceServer) {
+	s.RegisterService(&_NanoSuperService_serviceDesc, srv)
+}
+
+func _NanoSuperService_NanoSuperService_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NanoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NanoSuperServiceServer).NanoSuperService(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nanogrpc.NanoSuperService/NanoSuperService",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NanoSuperServiceServer).NanoSuperService(ctx, req.(*NanoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _NanoSuperService_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "nanogrpc.NanoSuperService",
+	HandlerType: (*NanoSuperServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "nanoSuperService",
+			Handler:    _NanoSuperService_NanoSuperService_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
