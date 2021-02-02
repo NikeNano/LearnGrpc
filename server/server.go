@@ -9,20 +9,20 @@ import (
 	"net"
 	"os"
 
-	"github.com/javiramos1/grpcapi"
+	"github.com/NikeNano/LearnGrpc/api"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )
 
 type nanoServer struct{}
 
-func (*nanoServer) GrpcService(ctx context.Context, req *grpcapi.GrpcRequest) (*grpcapi.GrpcResponse, error) {
+func (*nanoServer) GrpcService(ctx context.Context, req *api.GrpcRequest) (*api.GrpcResponse, error) {
 	fmt.Printf("NanoServer %v\n", req)
 	name, _ := os.Hostname()
 
 	input := req.GetInput()
 	result := "Got input " + input + " server host: " + name
-	res := &grpcapi.GrpcResponse{
+	res := &api.GrpcResponse{
 		Response: result,
 	}
 	return res, nil
@@ -52,7 +52,7 @@ func main() {
 
 	opts := []grpc.ServerOption{}
 	s := grpc.NewServer(opts...)
-	grpcapi.RegisterGrpcServiceServer(s, &grpcServer{})
+	api.RegisterGrpcServiceServer(s, &nanoServer{})
 
 	// reflection service on gRPC server.
 	reflection.Register(s)
