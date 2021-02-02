@@ -1,4 +1,4 @@
-package nanogrpc
+package main
 
 import (
 	"context"
@@ -9,21 +9,28 @@ import (
 	"net"
 	"os"
 
-	"github.com/NikeNano/LearnGrpc/api"
+	api "github.com/NikeNano/LearnGrpc/api"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )
 
 type nanoServer struct{}
 
-func (*nanoServer) GrpcService(ctx context.Context, req *api.GrpcRequest) (*api.GrpcResponse, error) {
+func (*nanoServer) NanoService(ctx context.Context, req *api.NanoRequest) (*api.NanoResponse, error) {
 	fmt.Printf("NanoServer %v\n", req)
 	name, _ := os.Hostname()
 
 	input := req.GetInput()
 	result := "Got input " + input + " server host: " + name
-	res := &api.GrpcResponse{
+	res := &api.NanoResponse{
 		Response: result,
+	}
+	return res, nil
+}
+
+func (*nanoServer) NanoSuperServer(ctx context.Context, req *api.NanoRequest) (*api.NanoResponse, error) {
+	res := &api.NanoResponse{
+		Response: "Success Success oops dont care what you send",
 	}
 	return res, nil
 }
@@ -52,7 +59,7 @@ func main() {
 
 	opts := []grpc.ServerOption{}
 	s := grpc.NewServer(opts...)
-	api.RegisterGrpcServiceServer(s, &nanoServer{})
+	api.RegisterNanoServiceServer(s, &nanoServer{})
 
 	// reflection service on gRPC server.
 	reflection.Register(s)
