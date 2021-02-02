@@ -3,6 +3,7 @@ module github.com/NikeNano/LearnGrpc
 go 1.15
 
 require (
+	github.com/NikeNano/LearnGrpc/api v0.0.0-20210202131026-a6b52f33d495 // indirect
 	github.com/golang/protobuf v1.4.3
 	github.com/javiramos1/grpcapi v0.0.0-20191228205226-b3ca6c4ae1bb // indirect
 	golang.org/x/net v0.0.0-20210119194325-5f4716e94777 // indirect
