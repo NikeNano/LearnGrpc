@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package nanogrpc;
+option go_package="nanogrpc";
+
+
+message NanoRequest {
+	string input = 1;
+}
+
+message NanoResponse {
+	string response = 1;
+}
+
+service NanoService {
+
+	rpc nanoService(NanoRequest) returns (NanoResponse) {};
+ 
+}
