@@ -15,11 +15,8 @@ message NanoResponse {
 service NanoService {
 
 	rpc nanoService(NanoRequest) returns (NanoResponse) {};
+
+	rpc nanoSuperService(NanoRequest) returns (NanoResponse) {};
  
 }
 
-service NanoSuperService {
-	
-	rpc nanoSuperService(NanoRequest) returns (NanoResponse) {};
-
-}
